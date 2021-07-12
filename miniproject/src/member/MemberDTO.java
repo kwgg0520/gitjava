@@ -34,6 +34,13 @@ public class MemberDTO {
 		this.email = email;
 	}
 
+	public MemberDTO(String id, String password, String email) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.email = email;
+	}
+
 	public MemberDTO() {
 		super();
 	}

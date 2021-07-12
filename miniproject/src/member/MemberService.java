@@ -34,7 +34,6 @@ public class MemberService {
 
 	public void modify() {
 		// TODO Auto-generated method stub
-		ArrayList<MemberDTO> list = dao.getAll();
 		System.out.println("수정할 ID를 입력하세요.");
 		String id = sc.nextLine();
 		index = check(id);
@@ -46,8 +45,7 @@ public class MemberService {
 			String password = sc.nextLine();
 			System.out.println("수정할 Email을 입력하세요.");
 			String email = sc.nextLine();
-			int result = dao.update(new MemberDTO(list.get(index).getMemberno(), id, password,
-					list.get(index).getName(), email, list.get(index).getSdate()));
+			int result = dao.update(new MemberDTO(id, password, email));
 			if (result > 0)
 				System.out.println("수정완료");
 			else
