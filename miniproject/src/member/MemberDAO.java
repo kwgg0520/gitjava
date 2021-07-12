@@ -1,6 +1,5 @@
 package member;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -56,7 +55,7 @@ public class MemberDAO {
 	}
 
 	// 회원수정
-	public int update(int index, MemberDTO dto) {
+	public int update(MemberDTO dto) {
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null;
 		StringBuilder sql = new StringBuilder();
@@ -72,8 +71,7 @@ public class MemberDAO {
 			pstmt.setString(2, dto.getEmail());
 			pstmt.setString(3, dto.getId());
 			result = pstmt.executeUpdate();
-			
-			
+
 		} catch (SQLException e) {
 			System.out.println(e);
 		} finally {
@@ -81,7 +79,29 @@ public class MemberDAO {
 		}
 		return result;
 	}
-	// delete 기능 메서드
+
+	// 회원탈퇴
+	public int delete(MemberDTO dto) {
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null;
+		StringBuilder sql = new StringBuilder();
+		sql.append(" delete members 		");
+		sql.append(" where id=? and password=?	");
+
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getPassword());
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println(e);
+		} finally {
+			close(pstmt, conn);
+		}
+		return result;
+	}
 
 	// 전체보기
 	public ArrayList<MemberDTO> getAll() {
@@ -89,7 +109,7 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<MemberDTO> arr = new ArrayList<>();
-		
+
 		try {
 			StringBuilder sql = new StringBuilder();
 			sql.append(" select 				");

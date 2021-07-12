@@ -1,6 +1,5 @@
 package member;
 
-
 import java.sql.Date;
 
 public class MemberDTO {
@@ -10,7 +9,7 @@ public class MemberDTO {
 	private String name;
 	private String email;
 	private Date sdate;
-	
+
 	public MemberDTO(int memberno, String id, String password, String name, String email, Date sdate) {
 		super();
 		this.memberno = memberno;
@@ -19,6 +18,12 @@ public class MemberDTO {
 		this.name = name;
 		this.email = email;
 		this.sdate = sdate;
+	}
+
+	public MemberDTO(String id, String password) {
+		super();
+		this.id = id;
+		this.password = password;
 	}
 
 	public MemberDTO(String id, String password, String name, String email) {
@@ -45,7 +50,6 @@ public class MemberDTO {
 		return id;
 	}
 
-	
 	public String getPassword() {
 		return password;
 	}
